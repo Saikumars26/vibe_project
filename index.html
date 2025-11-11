@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Other People's Cats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #A5FFD6;
+      color: #817F75;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 2px solid #817F75;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .site-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .site-title:hover {
+      transform: scale(1.05);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #817F75;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      color: #5a5852;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 100px 0 80px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .cta-button {
+      background-color: #817F75;
+      color: #A5FFD6;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      background-color: #5a5852;
+      transform: translateY(-3px);
+    }
+
+    /* Product Section */
+    .product-section {
+      padding: 80px 0;
+    }
+
+    .product-image {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .product-image img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.5);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #817F75;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      font-weight: 700;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.7);
+      padding: 30px;
+      border-radius: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: scale(1.05);
+    }
+
+    .testimonial-card p {
+      font-style: italic;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .testimonial-card cite {
+      font-weight: 600;
+      font-style: normal;
+      font-size: 0.9rem;
+    }
+
+    /* Tracking Map */
+    .tracking-map {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .tracking-map h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+
+    .map-container {
+      background: linear-gradient(135deg, #d4f1e5 0%, #b8e6d5 100%);
+      border: 3px solid #817F75;
+      border-radius: 20px;
+      padding: 60px 40px;
+      position: relative;
+      min-height: 400px;
+      overflow: hidden;
+    }
+
+    .cat-marker {
+      position: absolute;
+      animation: float 3s ease-in-out infinite;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .cat-marker span {
+      display: block;
+      font-size: 0.7rem;
+      background: rgba(255,255,255,0.9);
+      padding: 5px 10px;
+      border-radius: 10px;
+      margin-top: 5px;
+      font-weight: 600;
+    }
+
+    .cat-marker:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+    .cat-marker:nth-child(2) { top: 50%; left: 60%; animation-delay: 1s; }
+    .cat-marker:nth-child(3) { top: 70%; left: 30%; animation-delay: 2s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Pricing */
+    .pricing {
+      padding: 80px 0;
+    }
+
+    .pricing h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      font-weight: 700;
+    }
+
+    .pricing-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.6);
+      padding: 40px 30px;
+      border-radius: 15px;
+      border: 2px solid #817F75;
+      flex: 1;
+      min-width: 250px;
+      max-width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: scale(1.05);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .pricing-card p {
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    .pricing-button {
+      background-color: #817F75;
+      color: #A5FFD6;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      cursor: not-allowed;
+      opacity: 0.6;
+      font-weight: 600;
+      filter: blur(1px);
+    }
+
+    /* FAQ */
+    .faq {
+      padding: 80px 0;
+    }
+
+    .faq h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      font-weight: 700;
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,0.5);
+      margin-bottom: 15px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid #817F75;
+    }
+
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(255,255,255,0.8);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 20px;
+    }
+
+    .faq-answer.active {
+      max-height: 200px;
+      padding: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #817F75;
+      color: #A5FFD6;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      margin-bottom: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 20px 0;
+      font-size: 1.5rem;
+    }
+
+    .social-icons a {
+      color: #A5FFD6;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .disclaimer {
+      font-size: 0.9rem;
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    /* Easter Egg */
+    .floating-cat {
+      position: fixed;
+      font-size: 3rem;
+      animation: floatUp 2s ease-out forwards;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-500px) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      nav ul { gap: 15px; font-size: 0.9rem; }
+      .header-content { justify-content: center; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="site-title" id="logo">🐱 Track Other People's Cats</div>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1>Finally Know Where Other People's Cats Go.</h1>
+        <p>Ethically questionable. Technologically flawless.</p>
+        <button class="cta-button" id="ctaButton">Order Now (Before They Notice)</button>
+      </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="product-section" id="features">
+      <div class="container">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop" alt="Cat with collar">
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>📍 Live GPS Snooping</h3>
+            <p>See where your neighbor's cat really goes. Spoiler: It's not just your yard.</p>
+          </div>
+          <div class="feature-card">
+            <h3>😺 Emotion Detector (Probably Wrong)</h3>
+            <p>It's science... ish. Our AI guesses what they're feeling. Accuracy: debatable.</p>
+          </div>
+          <div class="feature-card">
+            <h3>🥷 Stealth Mode</h3>
+            <p>100% unethical. 100% effective. They'll never know until the lawsuit arrives.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <div class="container">
+        <h2>What Our Users (Allegedly) Say</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <p>"Now I finally know Mr. Whiskers' secrets!"</p>
+            <cite>— Anonymous Neighbor</cite>
+          </div>
+          <div class="testimonial-card">
+            <p>"Got sued, but worth it."</p>
+            <cite>— Satisfied User</cite>
+          </div>
+          <div class="testimonial-card">
+            <p>"My therapist says I need to stop. I say I need more collars."</p>
+            <cite>— Probably Needs Help</cite>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tracking Map -->
+    <section class="tracking-map">
+      <div class="container">
+        <h2>Live (Fake) Tracking Data</h2>
+        <div class="map-container">
+          <div class="cat-marker">🐾<span>Mittens_001</span></div>
+          <div class="cat-marker">🐾<span>Agent Whiskers</span></div>
+          <div class="cat-marker">🐾<span>FluffyFromNextDoor</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <h2>Pricing Plans</h2>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>Free Trial</h3>
+            <p>"Track one unsuspecting cat."</p>
+            <button class="pricing-button">Subscribe</button>
+          </div>
+          <div class="pricing-card">
+            <h3>Pro Plan</h3>
+            <p>"Unlimited cats. Unlimited lawsuits."</p>
+            <button class="pricing-button">Subscribe</button>
+          </div>
+          <div class="pricing-card">
+            <h3>Enterprise Plan</h3>
+            <p>"For entire neighborhoods."</p>
+            <button class="pricing-button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <div class="faq-question">
+            Is this legal?
+            <span>▼</span>
+          </div>
+          <div class="faq-answer">
+            Probably not. But neither is jaywalking, and you still do that.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Can I track dogs?
+            <span>▼</span>
+          </div>
+          <div class="faq-answer">
+            That's weird. We don't judge. (Yes, but we'll judge you silently.)
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Do cats consent?
+            <span>▼</span>
+          </div>
+          <div class="faq-answer">
+            They've been ignoring us for centuries. We're calling it even.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <p>© 2025 Totally Not Illegal LLC.</p>
+        <div class="social-icons">
+          <a href="#" title="Twitter">🐦</a>
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="LinkedIn">💼</a>
+        </div>
+        <p class="disclaimer">This is a parody project. No cats (or neighbors) were harmed.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('active');
+      });
+    });
+
+    // Easter Egg - Floating cats
+    function createFloatingCat(x, y) {
+      const cat = document.createElement('div');
+      cat.className = 'floating-cat';
+      cat.textContent = '🐱';
+      cat.style.left = x + 'px';
+      cat.style.top = y + 'px';
+      document.body.appendChild(cat);
+      
+      setTimeout(() => cat.remove(), 2000);
+    }
+
+    // Logo hover
+    document.getElementById('logo').addEventListener('mouseenter', (e) => {
+      createFloatingCat(e.clientX, e.clientY);
+    });
+
+    // CTA button click
+    document.getElementById('ctaButton').addEventListener('click', (e) => {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          createFloatingCat(
+            e.clientX + (Math.random() - 0.5) * 100,
+            e.clientY + (Math.random() - 0.5) * 100
+          );
+        }, i * 100);
+      }
+    });
+  </script>
+</body>
+</html>
