@@ -1,35 +1,35 @@
-// COLOR PICKER
-const backpackShellColor = document.getElementById("backpackShellColor");
+// ===== COLOR PICKER =====
+const bagShape = document.getElementById("bagShape");
 const colorNameText = document.getElementById("colorNameText");
 const colorDots = document.querySelectorAll(".color-dot");
+const previewPrice = document.getElementById("previewPrice");
 
 const colorStyles = {
-  shadow: {
-    gradient: "radial-gradient(circle at 20% 0%, #9ca3af, #020617)",
-    name: "Shadow Black",
+  ocean: {
+    gradient: "linear-gradient(135deg, #38bdf8, #2563eb)",
+    name: "Ocean Blue",
+  },
+  sunset: {
+    gradient: "linear-gradient(135deg, #fb923c, #f97316)",
+    name: "Sunset Orange",
   },
   forest: {
-    gradient: "radial-gradient(circle at 20% 0%, #6ee7b7, #064e3b)",
+    gradient: "linear-gradient(135deg, #22c55e, #16a34a)",
     name: "Forest Green",
   },
-  sunrise: {
-    gradient: "radial-gradient(circle at 20% 0%, #fb923c, #7c2d12)",
-    name: "Sunrise Orange",
-  },
-  midnight: {
-    gradient: "radial-gradient(circle at 20% 0%, #38bdf8, #0f172a)",
-    name: "Midnight Blue",
+  berry: {
+    gradient: "linear-gradient(135deg, #ec4899, #db2777)",
+    name: "Berry Pink",
   },
 };
 
 colorDots.forEach((dot) => {
   dot.addEventListener("click", () => {
-    const colorKey = dot.getAttribute("data-color");
-    const style = colorStyles[colorKey];
-
+    const key = dot.getAttribute("data-color");
+    const style = colorStyles[key];
     if (!style) return;
 
-    backpackShellColor.style.background = style.gradient;
+    bagShape.style.background = style.gradient;
     colorNameText.textContent = style.name;
 
     colorDots.forEach((d) => d.classList.remove("active"));
@@ -37,31 +37,29 @@ colorDots.forEach((dot) => {
   });
 });
 
-// CAPACITY SLIDER
+// ===== CAPACITY SLIDER =====
 const capacityRange = document.getElementById("capacityRange");
 const capacityOutput = document.getElementById("capacityOutput");
 const capacityLabel = document.getElementById("capacityLabel");
 
 function updateCapacityText(value) {
-  let label;
-  let description;
-
   const v = Number(value);
+  let label = "";
+  let text = "";
 
   if (v <= 20) {
     label = `${v}L · compact`;
-    description = `${v}L is perfect for light travel, errands, and minimalist carry.`;
+    text = `${v}L is good for light carry and short trips.`;
   } else if (v <= 26) {
-    label = `${v}L · daily carry`;
-    description = `${v}L comfortably fits books, laptop, chargers, and a hoodie.`;
+    label = `${v}L · everyday`;
+    text = `${v}L works well for school, office, or college days.`;
   } else {
-    label = `${v}L · weekend trip`;
-    description = `${v}L is great for short trips and overnight stays with extra clothes.`;
+    label = `${v}L · extra space`;
+    text = `${v}L is better for travel and carrying clothes as well.`;
   }
 
   capacityLabel.textContent = label;
-  capacityOutput.textContent = description;
-
+  capacityOutput.textContent = text;
   capacityRange.setAttribute("aria-valuenow", String(v));
 }
 
@@ -69,10 +67,9 @@ capacityRange.addEventListener("input", (e) => {
   updateCapacityText(e.target.value);
 });
 
-// Initialize capacity text on load
 updateCapacityText(capacityRange.value);
 
-// PRICE CALCULATOR
+// ===== PRICE CALCULATOR =====
 const basePrice = 129;
 const totalPriceEl = document.getElementById("totalPrice");
 const addonsSummaryEl = document.getElementById("addonsSummary");
@@ -91,36 +88,36 @@ function updatePrice() {
 
   const total = basePrice + addonsTotal;
   totalPriceEl.textContent = `$${total}`;
+  previewPrice.textContent = `$${basePrice}`;
 
-  if (!selected.length) {
+  if (selected.length === 0) {
     addonsSummaryEl.textContent = "No add-ons selected yet.";
   } else {
     addonsSummaryEl.textContent = "Add-ons: " + selected.join(", ");
   }
 }
 
-// initialize price
 updatePrice();
 
-// TESTIMONIALS CAROUSEL
+// ===== TESTIMONIALS CAROUSEL =====
 const testimonials = [
   {
     text:
-      "“On a packed metro, I finally stopped checking my backpack every five seconds. The hidden zipper design just makes sense.”",
+      "“On a busy bus, I don't worry about my backpack anymore. The hidden zipper gives me peace of mind.”",
     name: "Jared · Grad student",
     location: "Austin, TX",
   },
   {
     text:
-      "“VaultPack has its own place in my daily setup. Laptop, tablet, notebook – everything has a pocket, and nothing feels loose.”",
-    name: "Maya · UX designer",
-    location: "Seattle, WA",
+      "“I use it every day for college. The inside is simple, so I always know where my laptop and books are.”",
+    name: "Anita · College student",
+    location: "Chicago, IL",
   },
   {
     text:
-      "“I travel between cities every week. This is the first backpack where I’m not worried about someone unzipping it behind me.”",
+      "“Travelling between cities is easier now. The bright color makes it easy to spot on luggage racks.”",
     name: "Rohit · Consultant",
-    location: "Chicago, IL",
+    location: "Dallas, TX",
   },
 ];
 
@@ -143,29 +140,28 @@ function changeTestimonial(direction) {
   renderTestimonial();
 }
 
-// initialize testimonials
 renderTestimonial();
 
-// FAQ ACCORDION
+// ===== FAQ ACCORDION =====
 function toggleFaq(button) {
   const item = button.closest(".faq-item");
   const panel = item.querySelector(".faq-panel");
 
   const isOpen = item.classList.contains("open");
-
   item.classList.toggle("open", !isOpen);
+
   button.setAttribute("aria-expanded", String(!isOpen));
   panel.setAttribute("aria-hidden", String(isOpen));
 }
 
-// SMOOTH SCROLL
+// ===== SMOOTH SCROLL =====
 function scrollToId(id) {
   const target = document.getElementById(id);
   if (!target) return;
   target.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// SCROLL TO TOP VISIBILITY
+// ===== SCROLL TO TOP BUTTON =====
 const scrollTopWrap = document.getElementById("scrollTopWrap");
 
 window.addEventListener("scroll", () => {
@@ -176,5 +172,5 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// FOOTER YEAR
+// ===== FOOTER YEAR =====
 document.getElementById("yearNow").textContent = new Date().getFullYear();

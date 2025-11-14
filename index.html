@@ -8,23 +8,23 @@
 </head>
 <body>
 <div class="page">
-  <header>
+  <header class="header">
     <nav class="nav" aria-label="Main navigation">
       <div class="nav-left">
-        <div class="logo" aria-hidden="true">
-          <span>V</span>
-        </div>
+        <div class="logo-circle" aria-hidden="true">V</div>
         <div class="nav-title">
-          <strong>VaultPack</strong>
-          <small>Smart Anti-Theft Backpack</small>
+          <span class="nav-brand">VaultPack</span>
+          <span class="nav-sub">Smart Anti-Theft Backpack</span>
         </div>
       </div>
+
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#configurator">Customize</a>
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
       </div>
+
       <button class="btn btn-primary nav-cta" onclick="scrollToId('configurator')">
         Pre-order
       </button>
@@ -32,165 +32,134 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <section class="section hero" aria-labelledby="hero-title">
-      <div>
-        <div class="eyebrow">
-          <span class="eyebrow-badge">New · 2025 Edition</span>
-          RFID-safe · USB-C charging · Hidden pockets
+      <div class="hero-text">
+        <div class="hero-tag-row">
+          <span class="pill pill-green">New · 2025</span>
+          <span class="pill pill-soft">Anti-theft · USB-C · RFID-safe</span>
         </div>
+
         <h1 id="hero-title">
-          The backpack that <span>protects</span> what matters.
+          A backpack that <span class="highlight">keeps you safe</span> in busy places.
         </h1>
+
         <p class="hero-subtitle">
-          <strong>VaultPack</strong> is a smart, anti-theft backpack for students,
-          commuters, and travelers. Hidden zippers, cut-resistant fabric, and a
-          built-in USB-C power pass-through so your laptop and phone stay safe
-          <em>and</em> charged all day.
+          <strong>VaultPack</strong> is made for students, travelers, and daily
+          commuters. Hidden zippers, strong straps, and a simple layout that
+          anyone can understand and use.
         </p>
 
-        <div class="hero-cta-row">
+        <div class="hero-actions">
           <button class="btn btn-primary" onclick="scrollToId('configurator')">
-            Build your VaultPack →
+            Build your VaultPack
           </button>
-          <button class="btn btn-ghost" onclick="scrollToId('features')">
-            See security features
+          <button class="btn btn-outline" onclick="scrollToId('features')">
+            View features
           </button>
         </div>
 
-        <div class="hero-meta" aria-label="Quick stats">
-          <span><span class="dot" aria-hidden="true"></span>Cut-resistant shell</span>
-          <span>Lockable zippers</span>
-          <span>Fits 16&quot; laptop</span>
-          <span>Hidden RFID card pocket</span>
-        </div>
+        <ul class="hero-points" aria-label="Key benefits">
+          <li>✔ Easy to use for all age groups</li>
+          <li>✔ Fits most 15–16&quot; laptops</li>
+          <li>✔ Padded straps for comfort</li>
+        </ul>
       </div>
 
-      <!-- HERO PREVIEW CARD -->
-      <div class="hero-right" aria-label="Backpack preview">
-        <div class="backpack-card">
-          <div class="badge-floating">
-            <span aria-hidden="true">🛡️</span> Anti-Theft Shell
+      <!-- Simple colorful preview card -->
+      <div class="hero-preview" aria-label="Backpack preview">
+        <div class="preview-card">
+          <div class="preview-header">
+            <span class="preview-label">Your VaultPack</span>
+            <span class="preview-price"><span id="previewPrice">$129</span> base</span>
           </div>
-          <div class="backpack-visual-wrapper">
-            <div class="glow" aria-hidden="true"></div>
-            <div class="backpack-visual" aria-hidden="true">
-              <div class="backpack-body">
-                <div class="backpack-shell">
-                  <div class="strap"></div>
-                  <div class="zip-line"></div>
-                  <div class="backpack-bottom"></div>
-                  <div class="backpack-foot"></div>
-                  <div
-                    class="backpack-shell-color"
-                    id="backpackShellColor"
-                    style="background: radial-gradient(circle at 20% 0%, #9ca3af, #020617);"
-                  ></div>
-                </div>
-              </div>
-              <div class="backpack-info-row">
-                <div>
-                  <div class="backpack-color-label">
-                    Color: <span id="colorNameText">Shadow Black</span>
-                  </div>
-                  <div class="color-dots" aria-label="Choose backpack color">
-                    <button class="color-dot active" data-color="shadow" aria-label="Shadow Black"></button>
-                    <button class="color-dot" data-color="forest" aria-label="Forest Green"></button>
-                    <button class="color-dot" data-color="sunrise" aria-label="Sunrise Orange"></button>
-                    <button class="color-dot" data-color="midnight" aria-label="Midnight Blue"></button>
-                  </div>
-                </div>
-                <div class="price-tag">
-                  $129 <span>base</span>
-                </div>
-              </div>
-              <div class="hero-badges" aria-hidden="true">
-                <div class="hero-badge">
-                  <span class="hero-badge-dot"></span>RFID-safe pockets
-                </div>
-                <div class="hero-badge">
-                  <span class="hero-badge-dot"></span>USB-C pass-through
-                </div>
-                <div class="hero-badge">
-                  <span class="hero-badge-dot"></span>Weather-resistant fabric
-                </div>
+
+          <div class="preview-bag-wrapper">
+            <div class="preview-bag" id="bagShape">
+              <div class="preview-pocket"></div>
+              <div class="preview-strap preview-strap-left"></div>
+              <div class="preview-strap preview-strap-right"></div>
+            </div>
+          </div>
+
+          <div class="preview-color-row">
+            <div>
+              <p class="preview-color-label">
+                Color: <strong id="colorNameText">Ocean Blue</strong>
+              </p>
+              <div class="color-dots" aria-label="Choose backpack color">
+                <button class="color-dot active" data-color="ocean" aria-label="Ocean Blue"></button>
+                <button class="color-dot" data-color="sunset" aria-label="Sunset Orange"></button>
+                <button class="color-dot" data-color="forest" aria-label="Forest Green"></button>
+                <button class="color-dot" data-color="berry" aria-label="Berry Pink"></button>
               </div>
             </div>
           </div>
-          <p class="small-pill">
-            Ships worldwide · 30-day returns · Lifetime zipper warranty
+
+          <p class="preview-note">
+            Bright, high-contrast colors so the bag is easy to see and easy to find.
           </p>
         </div>
       </div>
     </section>
 
     <!-- FEATURES + CONFIGURATOR -->
-    <section class="section" id="features" aria-labelledby="features-title">
-      <div class="grid-2">
+    <section class="section" id="features">
+      <div class="two-column">
         <div>
-          <h2 class="section-title" id="features-title">
-            Designed for crowded buses, airports, and campus hallways.
-          </h2>
+          <h2 class="section-title">Simple design. Strong protection.</h2>
           <p class="section-subtitle">
-            Every detail of VaultPack is made to quietly protect you:
-            <strong>hidden main zipper against your back</strong>, cut-resistant
-            straps, and smart organization so you never dig for your charger again.
+            No complicated tech, just smart basics that help in real life. Clear
+            pockets, easy access, and protection where it matters.
           </p>
 
-          <div class="feature-grid" aria-label="Security and comfort features">
+          <div class="feature-grid" aria-label="Main features">
             <article class="feature-card">
-              <div class="feature-title">Hidden Zippers</div>
-              <div class="feature-tag">Security</div>
+              <h3>Hidden main zipper</h3>
               <p>
-                Main compartment opens only from the back panel, keeping your
-                laptop out of reach in crowds.
+                The main opening rests against your back, so it&apos;s hard for
+                anyone else to reach.
               </p>
             </article>
             <article class="feature-card">
-              <div class="feature-title">Cut-Resistant Straps</div>
-              <div class="feature-tag">Protection</div>
+              <h3>Comfort for long days</h3>
               <p>
-                Reinforced steel mesh in the straps makes slash-and-run thefts
-                dramatically harder.
+                Soft straps and back padding make it easier to carry books,
+                laptops, and more.
               </p>
             </article>
             <article class="feature-card">
-              <div class="feature-title">RFID-Safe Pocket</div>
-              <div class="feature-tag">Privacy</div>
+              <h3>RFID-safe pocket</h3>
               <p>
-                Shields your cards and IDs from contactless skimming and digital
-                pick-pocketing.
+                A special pocket to protect cards and IDs from wireless scanning.
               </p>
             </article>
             <article class="feature-card">
-              <div class="feature-title">Smart Organization</div>
-              <div class="feature-tag">Everyday Carry</div>
+              <h3>Easy organization</h3>
               <p>
-                Dedicated sleeves for 16&quot; laptop, tablet, charger, and
-                accessories to keep everything in its place.
+                Simple sections inside the bag: one for laptop, one for books,
+                one for small items.
               </p>
             </article>
           </div>
         </div>
 
-        <!-- CONFIGURATOR -->
+        <!-- CONFIGURATOR / INTERACTIVE -->
         <aside class="config-card" id="configurator" aria-label="Backpack configurator">
-          <h2 class="section-title" style="font-size: 1.1rem; margin-top: 0;">
-            Build your VaultPack
-          </h2>
-          <p class="section-subtitle" style="margin-bottom: 0.6rem;">
-            Choose capacity and add smart upgrades. Your price updates instantly.
+          <h2 class="section-title small-title">Customize your backpack</h2>
+          <p class="section-subtitle small-subtitle">
+            Choose size and extras. The total price updates automatically.
           </p>
 
+          <!-- 1) Capacity slider -->
           <div class="config-group">
             <div class="config-label">
-              <label for="capacityRange">Capacity</label>
-              <span id="capacityLabel">24L · daily carry</span>
+              <label for="capacityRange">Capacity (bag size)</label>
+              <span id="capacityLabel">24L · everyday</span>
             </div>
             <input
               type="range"
               id="capacityRange"
-              class="capacity-input"
               min="18"
               max="35"
               value="24"
@@ -199,16 +168,18 @@
               aria-valuenow="24"
               aria-label="Backpack capacity in liters"
             />
-            <div class="capacity-output" id="capacityOutput">
-              24L is ideal for school, campus, and everyday commuting.
-            </div>
+            <p id="capacityOutput" class="helper-text">
+              24L is good for school, work, or college days.
+            </p>
           </div>
 
+          <!-- 2) Add-ons with price calculator -->
           <div class="config-group">
             <div class="config-label">
               <span>Add-ons</span>
-              <span>Optional</span>
+              <span class="muted">Optional</span>
             </div>
+
             <div class="addons">
               <label class="addon-item">
                 <input
@@ -219,9 +190,10 @@
                 />
                 <span>
                   Built-in 10,000 mAh power bank
-                  <span class="addon-meta">+ $25</span>
+                  <span class="addon-price">+ $25</span>
                 </span>
               </label>
+
               <label class="addon-item">
                 <input
                   type="checkbox"
@@ -231,9 +203,10 @@
                 />
                 <span>
                   Hidden Bluetooth / GPS tracker
-                  <span class="addon-meta">+ $35</span>
+                  <span class="addon-price">+ $35</span>
                 </span>
               </label>
+
               <label class="addon-item">
                 <input
                   type="checkbox"
@@ -243,7 +216,7 @@
                 />
                 <span>
                   Suitcase handle strap
-                  <span class="addon-meta">+ $15</span>
+                  <span class="addon-price">+ $15</span>
                 </span>
               </label>
             </div>
@@ -251,110 +224,84 @@
 
           <div class="price-summary">
             <div>
-              <div class="small-pill">Base price: $129</div>
-              <div id="addonsSummary" class="capacity-output">
+              <p class="muted">Base price: <strong>$129</strong></p>
+              <p id="addonsSummary" class="helper-text">
                 No add-ons selected yet.
-              </div>
+              </p>
             </div>
-            <div>
-              <div style="font-size: 0.7rem; color: var(--muted); text-align: right;">
-                Estimated total
-              </div>
-              <strong id="totalPrice">$129</strong>
+            <div class="price-total">
+              <span class="muted small-text">Total</span>
+              <span id="totalPrice" class="price-number">$129</span>
             </div>
           </div>
 
-          <button
-            class="btn btn-primary"
-            style="width: 100%; margin-top: 0.75rem;"
-          >
-            Pre-order now – ships in 2–3 weeks
+          <button class="btn btn-primary btn-full">
+            Pre-order now
           </button>
         </aside>
       </div>
-
-      <div class="stats-bar" aria-label="Performance stats">
-        <div class="stat-pill">
-          <strong>92%</strong>
-          of users feel safer wearing VaultPack in public spaces.
-        </div>
-        <div class="stat-pill">
-          <strong>16&quot;</strong>
-          laptop sleeve with extra padding and soft lining.
-        </div>
-        <div class="stat-pill">
-          <strong>12+ pockets</strong>
-          including quick-access top pocket for keys and cards.
-        </div>
-      </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="section" id="reviews" aria-labelledby="reviews-title">
-      <div class="flex-between">
+    <!-- REVIEWS -->
+    <section class="section" id="reviews">
+      <div class="section-header-row">
         <div>
-          <h2 class="section-title" id="reviews-title">Loved by commuters.</h2>
+          <h2 class="section-title">What people say</h2>
           <p class="section-subtitle">
-            Students, remote workers, and frequent travelers use VaultPack to keep
-            everything safe from hostel to classroom to airport gate.
+            Short, simple feedback from people who used the backpack for school,
+            office, and travel.
           </p>
         </div>
-        <div style="text-align: right; font-size: 0.78rem;">
-          ⭐ <strong>4.9</strong> average rating<br />
-          from early testers
+        <div class="rating-box">
+          ⭐ <strong>4.9 / 5</strong>
+          <span class="muted small-text">from early testers</span>
         </div>
       </div>
 
-      <div class="testimonials" aria-live="polite">
-        <p class="testimonial-quote" id="testimonialText">
-          “On a packed metro, I finally stopped checking my backpack every five
-          seconds. The hidden zipper design just makes sense.”
+      <!-- 3) Testimonials carousel -->
+      <div class="testimonial-card" aria-live="polite">
+        <p id="testimonialText" class="testimonial-text">
+          “On a busy bus, I don&apos;t worry about my backpack anymore. The hidden
+          zipper gives me peace of mind.”
         </p>
-        <div class="testimonial-meta">
-          <div>
-            <span id="testimonialName">Jared · Grad student</span><br />
-            <span id="testimonialLocation">Austin, TX</span>
-          </div>
-          <div class="testimonial-controls">
-            <button
-              class="btn-icon"
-              type="button"
-              aria-label="Previous review"
-              onclick="changeTestimonial(-1)"
-            >
-              ←
-            </button>
-            <button
-              class="btn-icon"
-              type="button"
-              aria-label="Next review"
-              onclick="changeTestimonial(1)"
-            >
-              →
-            </button>
-          </div>
+        <p class="testimonial-meta">
+          <span id="testimonialName">Jared · Grad student</span>
+          <span id="testimonialLocation">Austin, TX</span>
+        </p>
+
+        <div class="testimonial-controls">
+          <button
+            class="btn-icon"
+            type="button"
+            aria-label="Previous review"
+            onclick="changeTestimonial(-1)"
+          >
+            ←
+          </button>
+          <button
+            class="btn-icon"
+            type="button"
+            aria-label="Next review"
+            onclick="changeTestimonial(1)"
+          >
+            →
+          </button>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="faq" aria-labelledby="faq-title">
-      <div class="faq-grid">
+    <section class="section" id="faq">
+      <div class="two-column">
         <div>
-          <h2 class="section-title" id="faq-title">
-            Questions before you pack?
-          </h2>
+          <h2 class="section-title">Common questions</h2>
           <p class="section-subtitle">
-            Here are the answers to the most common questions. Each answer opens
-            with a single tap or click so screen readers can follow easily.
+            Answers are written in clear, simple language so everyone can
+            understand easily.
           </p>
-
-          <div class="faq-note">
-            Tip: Try opening multiple questions. The layout is fully responsive,
-            so everything should stay readable on your phone, tablet, or laptop.
-          </div>
         </div>
 
+        <!-- 4) FAQ accordion -->
         <div class="faq-list">
           <article class="faq-item">
             <button
@@ -363,14 +310,14 @@
               aria-expanded="false"
               onclick="toggleFaq(this)"
             >
-              <span>Is VaultPack waterproof?</span>
-              <span class="faq-icon">›</span>
+              <span>Is this bag waterproof?</span>
+              <span class="faq-icon">+</span>
             </button>
             <div class="faq-panel" aria-hidden="true">
-              <div class="faq-panel-inner">
-                VaultPack is made with water-resistant fabric that protects from
-                rain and spills, but it is not designed for full submersion.
-              </div>
+              <p>
+                The fabric is water-resistant, so it can handle light rain. It is
+                not meant to be fully under water.
+              </p>
             </div>
           </article>
 
@@ -381,14 +328,14 @@
               aria-expanded="false"
               onclick="toggleFaq(this)"
             >
-              <span>Will my 16&quot; gaming laptop fit?</span>
-              <span class="faq-icon">›</span>
+              <span>Will my 16&quot; laptop fit?</span>
+              <span class="faq-icon">+</span>
             </button>
             <div class="faq-panel" aria-hidden="true">
-              <div class="faq-panel-inner">
-                Yes. The padded laptop sleeve fits most 15&quot; and 16&quot;
-                laptops, including thicker gaming machines.
-              </div>
+              <p>
+                Yes. Most modern 15–16&quot; laptops fit in the padded laptop
+                section.
+              </p>
             </div>
           </article>
 
@@ -399,15 +346,14 @@
               aria-expanded="false"
               onclick="toggleFaq(this)"
             >
-              <span>Does the USB port include a power bank?</span>
-              <span class="faq-icon">›</span>
+              <span>Does it include a power bank?</span>
+              <span class="faq-icon">+</span>
             </button>
             <div class="faq-panel" aria-hidden="true">
-              <div class="faq-panel-inner">
-                The built-in USB-C pass-through lets you connect your own power
-                bank inside the bag. You can also add an official power bank as an
-                optional upgrade in the configurator.
-              </div>
+              <p>
+                The USB-C passthrough is built-in. You can add our power bank as
+                an extra or use your own.
+              </p>
             </div>
           </article>
 
@@ -418,14 +364,14 @@
               aria-expanded="false"
               onclick="toggleFaq(this)"
             >
-              <span>What is your return policy?</span>
-              <span class="faq-icon">›</span>
+              <span>What about returns?</span>
+              <span class="faq-icon">+</span>
             </button>
             <div class="faq-panel" aria-hidden="true">
-              <div class="faq-panel-inner">
-                You get 30 days to try VaultPack. If it doesn&apos;t work for
-                you, send it back in original condition for a full refund.
-              </div>
+              <p>
+                You have 30 days to test the bag. If you don&apos;t like it, you
+                can send it back in good condition.
+              </p>
             </div>
           </article>
         </div>
@@ -434,24 +380,23 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="footer">
     <div class="footer-inner">
-      <div>
-        © <span id="yearNow"></span> VaultPack (demo landing page). Built for a
-        web assignment.
-      </div>
-      <div>
-        This page is <strong>static HTML/CSS/JS</strong> and ready for deployment
-        on GitHub Pages.
-      </div>
+      <p>
+        © <span id="yearNow"></span> VaultPack (demo landing page).
+        Built as a student project.
+      </p>
+      <p class="muted small-text">
+        Simple HTML, CSS, and JavaScript. Designed to be accessible and mobile-friendly.
+      </p>
     </div>
   </footer>
 
-  <!-- SCROLL TO TOP -->
+  <!-- 5) Scroll-to-top button -->
   <div class="scroll-top" id="scrollTopWrap">
     <button type="button" onclick="scrollToId('hero-title')">
       ↑ Top
-      <span class="sr-only">Scroll back to the top of the page</span>
+      <span class="sr-only">Scroll back to the top</span>
     </button>
   </div>
 </div>
