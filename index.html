@@ -1,597 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track Other People's Cats</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #A5FFD6;
-      color: #817F75;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Header */
-    header {
-      padding: 20px 0;
-      border-bottom: 2px solid #817F75;
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .site-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .site-title:hover {
-      transform: scale(1.05);
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 30px;
-    }
-
-    nav a {
-      color: #817F75;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease, transform 0.3s ease;
-      display: inline-block;
-    }
-
-    nav a:hover {
-      color: #5a5852;
-      transform: translateY(-2px);
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 100px 0 80px;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 40px;
-      font-style: italic;
-    }
-
-    .cta-button {
-      background-color: #817F75;
-      color: #A5FFD6;
-      padding: 15px 40px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      display: inline-block;
-    }
-
-    .cta-button:hover {
-      background-color: #5a5852;
-      transform: translateY(-3px);
-    }
-
-    /* Product Section */
-    .product-section {
-      padding: 80px 0;
-    }
-
-    .product-image {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .product-image img {
-      max-width: 400px;
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .feature-card {
-      background: rgba(255,255,255,0.5);
-      padding: 30px;
-      border-radius: 15px;
-      border: 2px solid #817F75;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    }
-
-    .feature-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      font-weight: 600;
-    }
-
-    /* Testimonials */
-    .testimonials {
-      padding: 80px 0;
-      text-align: center;
-    }
-
-    .testimonials h2 {
-      font-size: 2.5rem;
-      margin-bottom: 50px;
-      font-weight: 700;
-    }
-
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .testimonial-card {
-      background: rgba(255,255,255,0.7);
-      padding: 30px;
-      border-radius: 15px;
-      transition: transform 0.3s ease;
-    }
-
-    .testimonial-card:hover {
-      transform: scale(1.05);
-    }
-
-    .testimonial-card p {
-      font-style: italic;
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-
-    .testimonial-card cite {
-      font-weight: 600;
-      font-style: normal;
-      font-size: 0.9rem;
-    }
-
-    /* Tracking Map */
-    .tracking-map {
-      padding: 80px 0;
-      text-align: center;
-    }
-
-    .tracking-map h2 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      font-weight: 700;
-    }
-
-    .map-container {
-      background: linear-gradient(135deg, #d4f1e5 0%, #b8e6d5 100%);
-      border: 3px solid #817F75;
-      border-radius: 20px;
-      padding: 60px 40px;
-      position: relative;
-      min-height: 400px;
-      overflow: hidden;
-    }
-
-    .cat-marker {
-      position: absolute;
-      animation: float 3s ease-in-out infinite;
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    .cat-marker span {
-      display: block;
-      font-size: 0.7rem;
-      background: rgba(255,255,255,0.9);
-      padding: 5px 10px;
-      border-radius: 10px;
-      margin-top: 5px;
-      font-weight: 600;
-    }
-
-    .cat-marker:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
-    .cat-marker:nth-child(2) { top: 50%; left: 60%; animation-delay: 1s; }
-    .cat-marker:nth-child(3) { top: 70%; left: 30%; animation-delay: 2s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
-    }
-
-    /* Pricing */
-    .pricing {
-      padding: 80px 0;
-    }
-
-    .pricing h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 50px;
-      font-weight: 700;
-    }
-
-    .pricing-grid {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .pricing-card {
-      background: rgba(255,255,255,0.6);
-      padding: 40px 30px;
-      border-radius: 15px;
-      border: 2px solid #817F75;
-      flex: 1;
-      min-width: 250px;
-      max-width: 280px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .pricing-card:hover {
-      transform: scale(1.05);
-    }
-
-    .pricing-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .pricing-card p {
-      margin-bottom: 30px;
-      font-style: italic;
-    }
-
-    .pricing-button {
-      background-color: #817F75;
-      color: #A5FFD6;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 25px;
-      cursor: not-allowed;
-      opacity: 0.6;
-      font-weight: 600;
-      filter: blur(1px);
-    }
-
-    /* FAQ */
-    .faq {
-      padding: 80px 0;
-    }
-
-    .faq h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 50px;
-      font-weight: 700;
-    }
-
-    .faq-item {
-      background: rgba(255,255,255,0.5);
-      margin-bottom: 15px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 2px solid #817F75;
-    }
-
-    .faq-question {
-      padding: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.3s ease;
-    }
-
-    .faq-question:hover {
-      background: rgba(255,255,255,0.8);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      padding: 0 20px;
-    }
-
-    .faq-answer.active {
-      max-height: 200px;
-      padding: 20px;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #817F75;
-      color: #A5FFD6;
-      padding: 40px 0;
-      text-align: center;
-    }
-
-    .footer-content {
-      margin-bottom: 20px;
-    }
-
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 20px 0;
-      font-size: 1.5rem;
-    }
-
-    .social-icons a {
-      color: #A5FFD6;
-      transition: transform 0.3s ease;
-      display: inline-block;
-    }
-
-    .social-icons a:hover {
-      transform: scale(1.2);
-    }
-
-    .disclaimer {
-      font-size: 0.9rem;
-      margin-top: 20px;
-      font-style: italic;
-    }
-
-    /* Easter Egg */
-    .floating-cat {
-      position: fixed;
-      font-size: 3rem;
-      animation: floatUp 2s ease-out forwards;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-500px) rotate(360deg); opacity: 0; }
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1rem; }
-      nav ul { gap: 15px; font-size: 0.9rem; }
-      .header-content { justify-content: center; gap: 20px; }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VaultPack – Smart Anti-Theft Backpack</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<div class="page">
   <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="site-title" id="logo">🐱 Track Other People's Cats</div>
-        <nav>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav-left">
+        <div class="logo" aria-hidden="true">
+          <span>V</span>
+        </div>
+        <div class="nav-title">
+          <strong>VaultPack</strong>
+          <small>Smart Anti-Theft Backpack</small>
+        </div>
       </div>
-    </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#configurator">Customize</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <button class="btn btn-primary nav-cta" onclick="scrollToId('configurator')">
+        Pre-order
+      </button>
+    </nav>
   </header>
 
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <h1>Finally Know Where Other People's Cats Go.</h1>
-        <p>Ethically questionable. Technologically flawless.</p>
-        <button class="cta-button" id="ctaButton">Order Now (Before They Notice)</button>
+    <!-- HERO SECTION -->
+    <section class="section hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-badge">New · 2025 Edition</span>
+          RFID-safe · USB-C charging · Hidden pockets
+        </div>
+        <h1 id="hero-title">
+          The backpack that <span>protects</span> what matters.
+        </h1>
+        <p class="hero-subtitle">
+          <strong>VaultPack</strong> is a smart, anti-theft backpack for students,
+          commuters, and travelers. Hidden zippers, cut-resistant fabric, and a
+          built-in USB-C power pass-through so your laptop and phone stay safe
+          <em>and</em> charged all day.
+        </p>
+
+        <div class="hero-cta-row">
+          <button class="btn btn-primary" onclick="scrollToId('configurator')">
+            Build your VaultPack →
+          </button>
+          <button class="btn btn-ghost" onclick="scrollToId('features')">
+            See security features
+          </button>
+        </div>
+
+        <div class="hero-meta" aria-label="Quick stats">
+          <span><span class="dot" aria-hidden="true"></span>Cut-resistant shell</span>
+          <span>Lockable zippers</span>
+          <span>Fits 16&quot; laptop</span>
+          <span>Hidden RFID card pocket</span>
+        </div>
+      </div>
+
+      <!-- HERO PREVIEW CARD -->
+      <div class="hero-right" aria-label="Backpack preview">
+        <div class="backpack-card">
+          <div class="badge-floating">
+            <span aria-hidden="true">🛡️</span> Anti-Theft Shell
+          </div>
+          <div class="backpack-visual-wrapper">
+            <div class="glow" aria-hidden="true"></div>
+            <div class="backpack-visual" aria-hidden="true">
+              <div class="backpack-body">
+                <div class="backpack-shell">
+                  <div class="strap"></div>
+                  <div class="zip-line"></div>
+                  <div class="backpack-bottom"></div>
+                  <div class="backpack-foot"></div>
+                  <div
+                    class="backpack-shell-color"
+                    id="backpackShellColor"
+                    style="background: radial-gradient(circle at 20% 0%, #9ca3af, #020617);"
+                  ></div>
+                </div>
+              </div>
+              <div class="backpack-info-row">
+                <div>
+                  <div class="backpack-color-label">
+                    Color: <span id="colorNameText">Shadow Black</span>
+                  </div>
+                  <div class="color-dots" aria-label="Choose backpack color">
+                    <button class="color-dot active" data-color="shadow" aria-label="Shadow Black"></button>
+                    <button class="color-dot" data-color="forest" aria-label="Forest Green"></button>
+                    <button class="color-dot" data-color="sunrise" aria-label="Sunrise Orange"></button>
+                    <button class="color-dot" data-color="midnight" aria-label="Midnight Blue"></button>
+                  </div>
+                </div>
+                <div class="price-tag">
+                  $129 <span>base</span>
+                </div>
+              </div>
+              <div class="hero-badges" aria-hidden="true">
+                <div class="hero-badge">
+                  <span class="hero-badge-dot"></span>RFID-safe pockets
+                </div>
+                <div class="hero-badge">
+                  <span class="hero-badge-dot"></span>USB-C pass-through
+                </div>
+                <div class="hero-badge">
+                  <span class="hero-badge-dot"></span>Weather-resistant fabric
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="small-pill">
+            Ships worldwide · 30-day returns · Lifetime zipper warranty
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- Product Section -->
-    <section class="product-section" id="features">
-      <div class="container">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop" alt="Cat with collar">
+    <!-- FEATURES + CONFIGURATOR -->
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="grid-2">
+        <div>
+          <h2 class="section-title" id="features-title">
+            Designed for crowded buses, airports, and campus hallways.
+          </h2>
+          <p class="section-subtitle">
+            Every detail of VaultPack is made to quietly protect you:
+            <strong>hidden main zipper against your back</strong>, cut-resistant
+            straps, and smart organization so you never dig for your charger again.
+          </p>
+
+          <div class="feature-grid" aria-label="Security and comfort features">
+            <article class="feature-card">
+              <div class="feature-title">Hidden Zippers</div>
+              <div class="feature-tag">Security</div>
+              <p>
+                Main compartment opens only from the back panel, keeping your
+                laptop out of reach in crowds.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-title">Cut-Resistant Straps</div>
+              <div class="feature-tag">Protection</div>
+              <p>
+                Reinforced steel mesh in the straps makes slash-and-run thefts
+                dramatically harder.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-title">RFID-Safe Pocket</div>
+              <div class="feature-tag">Privacy</div>
+              <p>
+                Shields your cards and IDs from contactless skimming and digital
+                pick-pocketing.
+              </p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-title">Smart Organization</div>
+              <div class="feature-tag">Everyday Carry</div>
+              <p>
+                Dedicated sleeves for 16&quot; laptop, tablet, charger, and
+                accessories to keep everything in its place.
+              </p>
+            </article>
+          </div>
         </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <h3>📍 Live GPS Snooping</h3>
-            <p>See where your neighbor's cat really goes. Spoiler: It's not just your yard.</p>
+
+        <!-- CONFIGURATOR -->
+        <aside class="config-card" id="configurator" aria-label="Backpack configurator">
+          <h2 class="section-title" style="font-size: 1.1rem; margin-top: 0;">
+            Build your VaultPack
+          </h2>
+          <p class="section-subtitle" style="margin-bottom: 0.6rem;">
+            Choose capacity and add smart upgrades. Your price updates instantly.
+          </p>
+
+          <div class="config-group">
+            <div class="config-label">
+              <label for="capacityRange">Capacity</label>
+              <span id="capacityLabel">24L · daily carry</span>
+            </div>
+            <input
+              type="range"
+              id="capacityRange"
+              class="capacity-input"
+              min="18"
+              max="35"
+              value="24"
+              aria-valuemin="18"
+              aria-valuemax="35"
+              aria-valuenow="24"
+              aria-label="Backpack capacity in liters"
+            />
+            <div class="capacity-output" id="capacityOutput">
+              24L is ideal for school, campus, and everyday commuting.
+            </div>
           </div>
-          <div class="feature-card">
-            <h3>😺 Emotion Detector (Probably Wrong)</h3>
-            <p>It's science... ish. Our AI guesses what they're feeling. Accuracy: debatable.</p>
+
+          <div class="config-group">
+            <div class="config-label">
+              <span>Add-ons</span>
+              <span>Optional</span>
+            </div>
+            <div class="addons">
+              <label class="addon-item">
+                <input
+                  type="checkbox"
+                  value="25"
+                  data-label="Power bank"
+                  onchange="updatePrice()"
+                />
+                <span>
+                  Built-in 10,000 mAh power bank
+                  <span class="addon-meta">+ $25</span>
+                </span>
+              </label>
+              <label class="addon-item">
+                <input
+                  type="checkbox"
+                  value="35"
+                  data-label="GPS tracker"
+                  onchange="updatePrice()"
+                />
+                <span>
+                  Hidden Bluetooth / GPS tracker
+                  <span class="addon-meta">+ $35</span>
+                </span>
+              </label>
+              <label class="addon-item">
+                <input
+                  type="checkbox"
+                  value="15"
+                  data-label="Luggage strap"
+                  onchange="updatePrice()"
+                />
+                <span>
+                  Suitcase handle strap
+                  <span class="addon-meta">+ $15</span>
+                </span>
+              </label>
+            </div>
           </div>
-          <div class="feature-card">
-            <h3>🥷 Stealth Mode</h3>
-            <p>100% unethical. 100% effective. They'll never know until the lawsuit arrives.</p>
+
+          <div class="price-summary">
+            <div>
+              <div class="small-pill">Base price: $129</div>
+              <div id="addonsSummary" class="capacity-output">
+                No add-ons selected yet.
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 0.7rem; color: var(--muted); text-align: right;">
+                Estimated total
+              </div>
+              <strong id="totalPrice">$129</strong>
+            </div>
           </div>
+
+          <button
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 0.75rem;"
+          >
+            Pre-order now – ships in 2–3 weeks
+          </button>
+        </aside>
+      </div>
+
+      <div class="stats-bar" aria-label="Performance stats">
+        <div class="stat-pill">
+          <strong>92%</strong>
+          of users feel safer wearing VaultPack in public spaces.
+        </div>
+        <div class="stat-pill">
+          <strong>16&quot;</strong>
+          laptop sleeve with extra padding and soft lining.
+        </div>
+        <div class="stat-pill">
+          <strong>12+ pockets</strong>
+          including quick-access top pocket for keys and cards.
         </div>
       </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
-      <div class="container">
-        <h2>What Our Users (Allegedly) Say</h2>
-        <div class="testimonial-grid">
-          <div class="testimonial-card">
-            <p>"Now I finally know Mr. Whiskers' secrets!"</p>
-            <cite>— Anonymous Neighbor</cite>
-          </div>
-          <div class="testimonial-card">
-            <p>"Got sued, but worth it."</p>
-            <cite>— Satisfied User</cite>
-          </div>
-          <div class="testimonial-card">
-            <p>"My therapist says I need to stop. I say I need more collars."</p>
-            <cite>— Probably Needs Help</cite>
-          </div>
+    <!-- TESTIMONIALS -->
+    <section class="section" id="reviews" aria-labelledby="reviews-title">
+      <div class="flex-between">
+        <div>
+          <h2 class="section-title" id="reviews-title">Loved by commuters.</h2>
+          <p class="section-subtitle">
+            Students, remote workers, and frequent travelers use VaultPack to keep
+            everything safe from hostel to classroom to airport gate.
+          </p>
+        </div>
+        <div style="text-align: right; font-size: 0.78rem;">
+          ⭐ <strong>4.9</strong> average rating<br />
+          from early testers
         </div>
       </div>
-    </section>
 
-    <!-- Tracking Map -->
-    <section class="tracking-map">
-      <div class="container">
-        <h2>Live (Fake) Tracking Data</h2>
-        <div class="map-container">
-          <div class="cat-marker">🐾<span>Mittens_001</span></div>
-          <div class="cat-marker">🐾<span>Agent Whiskers</span></div>
-          <div class="cat-marker">🐾<span>FluffyFromNextDoor</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-      <div class="container">
-        <h2>Pricing Plans</h2>
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>Free Trial</h3>
-            <p>"Track one unsuspecting cat."</p>
-            <button class="pricing-button">Subscribe</button>
+      <div class="testimonials" aria-live="polite">
+        <p class="testimonial-quote" id="testimonialText">
+          “On a packed metro, I finally stopped checking my backpack every five
+          seconds. The hidden zipper design just makes sense.”
+        </p>
+        <div class="testimonial-meta">
+          <div>
+            <span id="testimonialName">Jared · Grad student</span><br />
+            <span id="testimonialLocation">Austin, TX</span>
           </div>
-          <div class="pricing-card">
-            <h3>Pro Plan</h3>
-            <p>"Unlimited cats. Unlimited lawsuits."</p>
-            <button class="pricing-button">Subscribe</button>
-          </div>
-          <div class="pricing-card">
-            <h3>Enterprise Plan</h3>
-            <p>"For entire neighborhoods."</p>
-            <button class="pricing-button">Subscribe</button>
+          <div class="testimonial-controls">
+            <button
+              class="btn-icon"
+              type="button"
+              aria-label="Previous review"
+              onclick="changeTestimonial(-1)"
+            >
+              ←
+            </button>
+            <button
+              class="btn-icon"
+              type="button"
+              aria-label="Next review"
+              onclick="changeTestimonial(1)"
+            >
+              →
+            </button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="faq">
-      <div class="container">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-          <div class="faq-question">
-            Is this legal?
-            <span>▼</span>
-          </div>
-          <div class="faq-answer">
-            Probably not. But neither is jaywalking, and you still do that.
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            Can I track dogs?
-            <span>▼</span>
-          </div>
-          <div class="faq-answer">
-            That's weird. We don't judge. (Yes, but we'll judge you silently.)
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="faq-grid">
+        <div>
+          <h2 class="section-title" id="faq-title">
+            Questions before you pack?
+          </h2>
+          <p class="section-subtitle">
+            Here are the answers to the most common questions. Each answer opens
+            with a single tap or click so screen readers can follow easily.
+          </p>
+
+          <div class="faq-note">
+            Tip: Try opening multiple questions. The layout is fully responsive,
+            so everything should stay readable on your phone, tablet, or laptop.
           </div>
         </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            Do cats consent?
-            <span>▼</span>
-          </div>
-          <div class="faq-answer">
-            They've been ignoring us for centuries. We're calling it even.
-          </div>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <button
+              class="faq-button"
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+            >
+              <span>Is VaultPack waterproof?</span>
+              <span class="faq-icon">›</span>
+            </button>
+            <div class="faq-panel" aria-hidden="true">
+              <div class="faq-panel-inner">
+                VaultPack is made with water-resistant fabric that protects from
+                rain and spills, but it is not designed for full submersion.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button
+              class="faq-button"
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+            >
+              <span>Will my 16&quot; gaming laptop fit?</span>
+              <span class="faq-icon">›</span>
+            </button>
+            <div class="faq-panel" aria-hidden="true">
+              <div class="faq-panel-inner">
+                Yes. The padded laptop sleeve fits most 15&quot; and 16&quot;
+                laptops, including thicker gaming machines.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button
+              class="faq-button"
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+            >
+              <span>Does the USB port include a power bank?</span>
+              <span class="faq-icon">›</span>
+            </button>
+            <div class="faq-panel" aria-hidden="true">
+              <div class="faq-panel-inner">
+                The built-in USB-C pass-through lets you connect your own power
+                bank inside the bag. You can also add an official power bank as an
+                optional upgrade in the configurator.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button
+              class="faq-button"
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+            >
+              <span>What is your return policy?</span>
+              <span class="faq-icon">›</span>
+            </button>
+            <div class="faq-panel" aria-hidden="true">
+              <div class="faq-panel-inner">
+                You get 30 days to try VaultPack. If it doesn&apos;t work for
+                you, send it back in original condition for a full refund.
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-content">
-        <p>© 2025 Totally Not Illegal LLC.</p>
-        <div class="social-icons">
-          <a href="#" title="Twitter">🐦</a>
-          <a href="#" title="Instagram">📷</a>
-          <a href="#" title="LinkedIn">💼</a>
-        </div>
-        <p class="disclaimer">This is a parody project. No cats (or neighbors) were harmed.</p>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        © <span id="yearNow"></span> VaultPack (demo landing page). Built for a
+        web assignment.
+      </div>
+      <div>
+        This page is <strong>static HTML/CSS/JS</strong> and ready for deployment
+        on GitHub Pages.
       </div>
     </div>
   </footer>
 
-  <script>
-    // FAQ Accordion
-    document.querySelectorAll('.faq-question').forEach(question => {
-      question.addEventListener('click', () => {
-        const answer = question.nextElementSibling;
-        answer.classList.toggle('active');
-      });
-    });
+  <!-- SCROLL TO TOP -->
+  <div class="scroll-top" id="scrollTopWrap">
+    <button type="button" onclick="scrollToId('hero-title')">
+      ↑ Top
+      <span class="sr-only">Scroll back to the top of the page</span>
+    </button>
+  </div>
+</div>
 
-    // Easter Egg - Floating cats
-    function createFloatingCat(x, y) {
-      const cat = document.createElement('div');
-      cat.className = 'floating-cat';
-      cat.textContent = '🐱';
-      cat.style.left = x + 'px';
-      cat.style.top = y + 'px';
-      document.body.appendChild(cat);
-      
-      setTimeout(() => cat.remove(), 2000);
-    }
-
-    // Logo hover
-    document.getElementById('logo').addEventListener('mouseenter', (e) => {
-      createFloatingCat(e.clientX, e.clientY);
-    });
-
-    // CTA button click
-    document.getElementById('ctaButton').addEventListener('click', (e) => {
-      for (let i = 0; i < 5; i++) {
-        setTimeout(() => {
-          createFloatingCat(
-            e.clientX + (Math.random() - 0.5) * 100,
-            e.clientY + (Math.random() - 0.5) * 100
-          );
-        }, i * 100);
-      }
-    });
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
