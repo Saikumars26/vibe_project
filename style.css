@@ -263,6 +263,7 @@ main {
 }
 
 /* HERO RIGHT - PRODUCT */
+/* HERO RIGHT - PRODUCT */
 .hero-right {
   display: flex;
   align-items: center;
@@ -275,16 +276,20 @@ main {
   padding: 1.1rem;
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--border-soft);
-  max-width: 320px;
+  max-width: 260px;        /* 🔹 smaller card */
   width: 100%;
 }
 
 .product-image {
   border-radius: var(--radius-md);
   width: 100%;
+  max-width: 220px;        /* 🔹 limit image width */
+  max-height: 260px;       /* 🔹 limit image height */
   height: auto;
   object-fit: cover;
+  margin-inline: auto;     /* center inside card */
 }
+
 
 .product-info-top {
   display: flex;
