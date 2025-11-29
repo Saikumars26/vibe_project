@@ -287,7 +287,7 @@ main {
   max-height: 260px;       /* 🔹 limit image height */
   height: auto;
   object-fit: cover;
-  margin-inline: auto;     /* center inside card */
+  margin-inline: auto;     
 }
 
 
