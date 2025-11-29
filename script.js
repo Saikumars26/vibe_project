@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Smooth scroll for buttons with data-scroll-target
+  // Smooth scroll for buttons with data-scroll-target .
   document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = btn.getAttribute("data-scroll-target");
